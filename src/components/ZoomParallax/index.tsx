@@ -15,7 +15,7 @@ import Picture5 from '../../../public/images/5.jpg';
 import Picture6 from '../../../public/images/6.jpg';
 import Picture7 from '../../../public/images/7.jpg';
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger);
 
 interface Picture {
     src: StaticImageData;
