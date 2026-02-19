@@ -1,0 +1,461 @@
+// ─── Tokens ───────────────────────────────────────────────────────────────────
+
+$c-bg:        #0a1a14;
+$c-surface:   #0f2318;
+$c-surface2:  #122d20;
+$c-border:    rgba(255, 255, 255, 0.07);
+$c-border-h:  rgba(255, 255, 255, 0.13);
+
+$c-text:      #e8f4f0;
+$c-text-dim:  rgba(232, 244, 240, 0.55);
+$c-text-mute: rgba(232, 244, 240, 0.28);
+
+$c-green:     #22c678;
+$grad-accent: linear-gradient(135deg, #1a5a8a 0%, #1a8a6a 100%);
+
+$font-display: 'Cormorant Garamond', Georgia, serif;
+$font-body:    'Sora', 'DM Sans', system-ui, sans-serif;
+$font-mono:    'Space Mono', monospace;
+
+$ease:        cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in:     cubic-bezier(0.55, 0, 1, 0.45);
+
+// ─── Section ──────────────────────────────────────────────────────────────────
+
+.section {
+  background: $c-bg;
+  padding: 9rem 0 8rem;
+  overflow: hidden;
+  position: relative;
+
+  @media (max-width: 768px) { padding: 6rem 0 5rem; }
+}
+
+// ─── Heading ──────────────────────────────────────────────────────────────────
+
+.heading {
+  max-width: 1300px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: end;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.headingLeft { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $c-green;
+  font-family: $font-mono;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1.5px;
+    background: $c-green;
+    border-radius: 2px;
+  }
+}
+
+.title {
+  font-family: $font-display;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: $c-text;
+
+  em {
+    font-style: italic;
+    background: $grad-accent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.subtitle {
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  color: $c-text-dim;
+  line-height: 1.75;
+  max-width: 380px;
+  align-self: end;
+  padding-bottom: 0.5rem;
+
+  @media (max-width: 800px) { max-width: 100%; }
+}
+
+// ─── Tabs ─────────────────────────────────────────────────────────────────────
+
+.tabsWrapper {
+  max-width: 1300px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.tabs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: $c-surface;
+  border: 1px solid $c-border;
+  border-radius: 100px;
+  padding: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+  max-width: 100%;
+
+  &::-webkit-scrollbar { display: none; }
+
+  @media (max-width: 860px) {
+    // On mobile allow horizontal scroll
+    border-radius: 14px;
+    padding: 4px;
+  }
+}
+
+// GSAP-positioned pill — absolute, GSAP sets x and width
+.tabPill {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  height: calc(100% - 8px);
+  background: $grad-accent;
+  border-radius: 100px;
+  pointer-events: none;
+  z-index: 0;
+  // GSAP controls x and width
+}
+
+.tab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.1rem;
+  border: none;
+  background: none;
+  border-radius: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: $font-body;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: $c-text-dim;
+  transition: color 0.25s ease;
+
+  &Active { color: #fff; }
+
+  &:not(.tabActive):hover { color: $c-text; }
+}
+
+.tabEmoji {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.tabLabel {
+  @media (max-width: 540px) { font-size: 0.75rem; }
+}
+
+.productCount {
+  font-family: $font-mono;
+  font-size: 0.7rem;
+  color: $c-text-mute;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+// ─── Grid ─────────────────────────────────────────────────────────────────────
+
+.grid {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+
+  @media (max-width: 1100px) { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 780px)  { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 480px)  { grid-template-columns: 1fr; }
+}
+
+// ─── Card ─────────────────────────────────────────────────────────────────────
+
+.card {
+  position: relative;
+  background: $c-surface;
+  border: 1px solid $c-border;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s ease, box-shadow 0.35s ease;
+  will-change: transform, opacity;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow:
+            0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent),
+            0 24px 64px rgba(0, 0, 0, 0.45);
+
+    .cardGlow {
+      opacity: 1;
+    }
+
+    .cardIconWrap svg {
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    .cardBtn {
+      background: var(--accent);
+      color: #000;
+      border-color: transparent;
+    }
+  }
+}
+
+// ─── Card Badges ──────────────────────────────────────────────────────────────
+
+.cardBadges {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: flex-end;
+  z-index: 2;
+}
+
+%badge-base {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.6rem;
+  border-radius: 100px;
+  font-family: $font-mono;
+}
+
+.badgeNew {
+  @extend %badge-base;
+  background: rgba(34, 198, 120, 0.15);
+  color: $c-green;
+  border: 1px solid rgba(34, 198, 120, 0.3);
+}
+
+.badgeBest {
+  @extend %badge-base;
+  background: rgba(198, 160, 34, 0.12);
+  color: #c6a022;
+  border: 1px solid rgba(198, 160, 34, 0.28);
+}
+
+// ─── Card Visual ─────────────────────────────────────────────────────────────
+
+.cardVisual {
+  position: relative;
+  padding: 2rem 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // Subtle gradient bg
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+                    ellipse at 50% 80%,
+                    color-mix(in srgb, var(--accent) 12%, transparent),
+                    transparent 70%
+    );
+    pointer-events: none;
+  }
+}
+
+.cardIconWrap {
+  width: 100px;
+  height: 80px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.45s $ease;
+  }
+}
+
+.cardTag {
+  position: absolute;
+  bottom: 0.75rem; left: 1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tag-color, $c-green);
+  background: color-mix(in srgb, var(--tag-color, $c-green) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tag-color, $c-green) 35%, transparent);
+  padding: 0.22rem 0.65rem;
+  border-radius: 100px;
+  font-family: $font-mono;
+}
+
+// ─── Card Info ────────────────────────────────────────────────────────────────
+
+.cardInfo {
+  padding: 0 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.cardBrand {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-family: $font-mono;
+  opacity: 0.85;
+}
+
+.cardName {
+  font-family: $font-display;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $c-text;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.cardSpecs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.25rem;
+  flex: 1;
+
+  li {
+    font-size: 0.775rem;
+    color: $c-text-dim;
+    line-height: 1.4;
+    padding: 0.28rem 0;
+    border-bottom: 1px solid $c-border;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    &:last-child { border-bottom: none; }
+  }
+}
+
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid $c-border;
+}
+
+.cardPricing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.cardPrice {
+  font-family: $font-display;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: $c-text;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.cardOriginal {
+  font-size: 0.72rem;
+  color: $c-text-mute;
+  text-decoration: line-through;
+  font-family: $font-mono;
+}
+
+.cardBtn {
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: $font-body;
+  letter-spacing: 0.03em;
+  color: $c-text;
+  background: transparent;
+  border: 1px solid $c-border-h;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+
+  &:hover { transform: scale(1.04); }
+  &:active { transform: scale(0.97); }
+}
+
+
+.cardGlow {
+  position: absolute;
+  bottom: 0; left: 5%; right: 5%;
+  height: 2px;
+  background: linear-gradient(
+                  90deg,
+                  transparent,
+                  var(--accent),
+                  transparent
+  );
+  opacity: 0;
+  border-radius: 0 0 20px 20px;
+  transition: opacity 0.4s ease;
+}

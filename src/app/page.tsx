@@ -6,6 +6,9 @@ import Lenis from "lenis";
 import { useEffect } from "react";
 import Des from "@/components/Des";
 import Zoom from "@/components/ZoomParallax/index";
+import Why from "@/components/Why/index";
+import Card from "@/components/Cards/index";
+import Products from "@/components/Product";
 
 export default function Home() {
     useEffect(() => {
@@ -25,6 +28,9 @@ export default function Home() {
   return (
     <div className={styles.page}>
         <Landing />
+        <Products />
+        <Why />
+        <Card />
         <Des />
         <Zoom />
     </div>

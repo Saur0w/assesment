@@ -215,15 +215,12 @@ const Footer: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Divider */}
                 <div className={styles.dividerLine} />
 
-                {/* Bottom bar */}
                 <div ref={bottomRef} className={styles.bottom}>
                     <p className={styles.copy}>
                         © {new Date().getFullYear()} Studio. All rights reserved.
                     </p>
-
                 </div>
             </div>
         </footer>
