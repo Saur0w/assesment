@@ -9,19 +9,19 @@ import { useGSAP } from "@gsap/react";
 
 interface WorkProps {
     title: string;
-    industry: string;
-    place: string;
-    role: string;
+    type: string;
+    property: string;
+    price: string;
     src: string;
     color: string;
 }
 
 const projects: WorkProps[] = [
-    { title: "ASUS ROG Strix G16",     industry: "Gaming Laptop",  place: "RTX 4070 · 240Hz",   role: "Starting ₹1,49,990", color: "#0d2010", src: "asus-rog.jpg"      },
-    { title: "Destroyer X Pro",        industry: "Gaming PC",      place: "RTX 4090 · Ryzen 9", role: "Starting ₹1,89,990", color: "#1a0d0d", src: "destroyer-x.jpg"   },
-    { title: "LG UltraGear 27\" 4K",  industry: "Monitor",        place: "4K · 160Hz · IPS",   role: "Starting ₹54,990",   color: "#0d1520", src: "lg-ultragear.jpg"  },
-    { title: "Hikvision AcuSense",     industry: "CCTV System",    place: "4MP · AI Detect",    role: "Starting ₹4,290",    color: "#1a150a", src: "hikvision.jpg"     },
-    { title: "Dell XPS 15 OLED",       industry: "Laptop",         place: "OLED · Core i7",     role: "Starting ₹1,49,990", color: "#110d1a", src: "dell-xps.jpg"      },
+    { title: "ASUS ROG Strix G16",     type: "Gaming Laptop",  property: "RTX 4070 · 240Hz",   price: "Starting ₹1,49,990", color: "#0d2010", src: "asus-rog.webp"      },
+    { title: "Destroyer X Pro",        type: "Gaming PC",      property: "RTX 4090 · Ryzen 9", price: "Starting ₹1,89,990", color: "#1a0d0d", src: "alienware.avif"   },
+    { title: "LG UltraGear 27\" 4K",  type: "Monitor",        property: "4K · 160Hz · IPS",   price: "Starting ₹54,990",   color: "#0d1520", src: "lg.avif"  },
+    { title: "Hikvision AcuSense",     type: "CCTV System",    property: "4MP · AI Detect",    price: "Starting ₹4,290",    color: "#1a150a", src: "hk.webp"     },
+    { title: "Dell XPS 15 OLED",       type: "Laptop",         property: "OLED · Core i7",     price: "Starting ₹1,49,990", color: "#110d1a", src: "xps.jpg"      },
 ];
 
 export default function Work() {
@@ -89,9 +89,9 @@ export default function Work() {
                         key={i}
                         index={i}
                         title={project.title}
-                        industry={project.industry}
-                        place={project.place}
-                        role={project.role}
+                        type={project.type}
+                        property={project.property}
+                        price={project.price}
                         manageModal={manageModal}
                     />
                 ))}
@@ -102,11 +102,10 @@ export default function Work() {
                     {projects.map((project, i) => (
                         <div key={i} className={styles.modal} style={{ backgroundColor: project.color }}>
                             <Image
-                                src={`/images/products/${project.src}`}
+                                src={`/images/${project.src}`}
                                 alt={project.title}
-                                width={380}
-                                height={320}
-                                style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                                width={1080}
+                                height={1080}
                             />
                         </div>
                     ))}
