@@ -2,14 +2,16 @@
 
 .project {
   display: flex;
-  width: 100vw;
+  width: 100%;
   padding: 10px 50px;
   border-top: 1px solid rgb(2, 2, 2);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: opacity 0.2s;
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
-  margin-left: -250px;
+
+  // ← this was the main offender — nuked
+  // margin-left: -250px;
 
   &:last-of-type {
     border-bottom: 1px solid rgb(0, 0, 0);
@@ -17,6 +19,18 @@
 
   &:hover {
     opacity: 0.8;
+  }
+
+  // ── Tablet: tighten horizontal padding ────────────────────────────
+  @media (max-width: 1024px) {
+    padding: 10px 24px;
+  }
+
+  // ── Mobile: stack columns vertically, show only title + price ─────
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 4px;
   }
 }
 
@@ -35,6 +49,29 @@
   &.large {
     flex: 1.2;
   }
+
+  // ── Tablet: reduce padding ─────────────────────────────────────────
+  @media (max-width: 1024px) {
+    padding: 24px 16px;
+    gap: 8px;
+  }
+
+  // ── Mobile: collapse hidden columns, minimal padding ──────────────
+  @media (max-width: 768px) {
+    padding: 6px 0;
+    gap: 4px;
+    flex: unset;
+
+    // Hide industry + country columns on mobile — too cramped
+    &:nth-child(2),
+    &:nth-child(3) {
+      display: none;
+    }
+
+    &.large {
+      flex: unset;
+    }
+  }
 }
 
 .label {
@@ -42,6 +79,11 @@
   font-weight: 500;
   color: #0e0e0e;
   margin-bottom: 5px;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
 }
 
 .value {
@@ -52,4 +94,16 @@
   word-wrap: break-word;
   transition: all 0.4s;
   color: #000;
+
+  @media (max-width: 1024px) {
+    font-size: 22px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 17px;
+  }
 }

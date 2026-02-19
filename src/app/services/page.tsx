@@ -17,24 +17,22 @@ interface WorkProps {
 }
 
 const projects: WorkProps[] = [
-    { title: "Essence Persia",      industry: "Beauty",                  place: "Switzerland",   role: "Design and Development", color: "#6a1b1b",  src: "essence.jpg"  },
-    { title: "Comert Photography",  industry: "Photography",             place: "Netherlands",   role: "Design and Development", color: "#000000",  src: "comert.jpg"   },
-    { title: "Bushdid Smiles",      industry: "Healthcare",              place: "United States", role: "Design and Development", color: "#e1cb91",  src: "smiles.jpg"   },
-    { title: "Tomac",               industry: "Construction",            place: "Australia",     role: "Design and Development", color: "#e6bc2f",  src: "Tomac.jpg"    },
-    { title: "Baby Buri",           industry: "Children's Entertainment",place: "United States", role: "Design and Development", color: "#d8cf94",  src: "Baby.jpg"     },
+    { title: "ASUS ROG Strix G16",     industry: "Gaming Laptop",  place: "RTX 4070 · 240Hz",   role: "Starting ₹1,49,990", color: "#0d2010", src: "asus-rog.jpg"      },
+    { title: "Destroyer X Pro",        industry: "Gaming PC",      place: "RTX 4090 · Ryzen 9", role: "Starting ₹1,89,990", color: "#1a0d0d", src: "destroyer-x.jpg"   },
+    { title: "LG UltraGear 27\" 4K",  industry: "Monitor",        place: "4K · 160Hz · IPS",   role: "Starting ₹54,990",   color: "#0d1520", src: "lg-ultragear.jpg"  },
+    { title: "Hikvision AcuSense",     industry: "CCTV System",    place: "4MP · AI Detect",    role: "Starting ₹4,290",    color: "#1a150a", src: "hikvision.jpg"     },
+    { title: "Dell XPS 15 OLED",       industry: "Laptop",         place: "OLED · Core i7",     role: "Starting ₹1,49,990", color: "#110d1a", src: "dell-xps.jpg"      },
 ];
 
 export default function Work() {
     const [modal, setModal] = useState({ active: false, index: 0 });
     const { active, index } = modal;
 
-    // ── DOM refs ──────────────────────────────────────────────────────────────
     const modalContainerRef = useRef<HTMLDivElement>(null);
     const modalSliderRef    = useRef<HTMLDivElement>(null);
     const cursorRef         = useRef<HTMLDivElement>(null);
     const cursorLabelRef    = useRef<HTMLDivElement>(null);
 
-    // ── GSAP quickTo refs ─────────────────────────────────────────────────────
     const xMoveContainer   = useRef<gsap.QuickToFunc | null>(null);
     const yMoveContainer   = useRef<gsap.QuickToFunc | null>(null);
     const xMoveCursor      = useRef<gsap.QuickToFunc | null>(null);
@@ -42,13 +40,8 @@ export default function Work() {
     const xMoveCursorLabel = useRef<gsap.QuickToFunc | null>(null);
     const yMoveCursorLabel = useRef<gsap.QuickToFunc | null>(null);
 
-    // ── Init quickTo functions (runs once after mount) ────────────────────────
     useGSAP(() => {
-        if (
-            !modalContainerRef.current ||
-            !cursorRef.current ||
-            !cursorLabelRef.current
-        ) return;
+        if (!modalContainerRef.current || !cursorRef.current || !cursorLabelRef.current) return;
 
         xMoveContainer.current   = gsap.quickTo(modalContainerRef.current, "left", { duration: 0.8,  ease: "power3" });
         yMoveContainer.current   = gsap.quickTo(modalContainerRef.current, "top",  { duration: 0.8,  ease: "power3" });
@@ -58,36 +51,19 @@ export default function Work() {
         yMoveCursorLabel.current = gsap.quickTo(cursorLabelRef.current,    "top",  { duration: 0.45, ease: "power3" });
     }, []);
 
-    // ── Scale in/out on active change ─────────────────────────────────────────
     useGSAP(() => {
-        if (
-            !modalContainerRef.current ||
-            !cursorRef.current ||
-            !cursorLabelRef.current
-        ) return;
-
+        if (!modalContainerRef.current || !cursorRef.current || !cursorLabelRef.current) return;
         gsap.to(
             [modalContainerRef.current, cursorRef.current, cursorLabelRef.current],
-            {
-                scale:    active ? 1 : 0,
-                duration: 0.4,
-                ease:     active ? "power3.out" : "power3.in",
-            }
+            { scale: active ? 1 : 0, duration: 0.4, ease: active ? "power3.out" : "power3.in" }
         );
     }, [active]);
 
-    // ── Slide modal strip to active project ──────────────────────────────────
     useGSAP(() => {
         if (!modalSliderRef.current) return;
-
-        gsap.to(modalSliderRef.current, {
-            top:      `${index * -100}%`,
-            duration: 0.5,
-            ease:     "power3.inOut",
-        });
+        gsap.to(modalSliderRef.current, { top: `${index * -100}%`, duration: 0.5, ease: "power3.inOut" });
     }, [index]);
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
     const moveItems = (x: number, y: number) => {
         xMoveContainer.current?.(x);
         yMoveContainer.current?.(y);
@@ -97,12 +73,7 @@ export default function Work() {
         yMoveCursorLabel.current?.(y);
     };
 
-    const manageModal = (
-        isActive: boolean,
-        idx: number,
-        x: number,
-        y: number
-    ) => {
+    const manageModal = (isActive: boolean, idx: number, x: number, y: number) => {
         moveItems(x, y);
         setModal({ active: isActive, index: idx });
     };
@@ -112,7 +83,6 @@ export default function Work() {
             className={styles.work}
             onMouseMove={(e) => moveItems(e.clientX, e.clientY)}
         >
-            {/* ── Project list ── */}
             <div className={styles.body}>
                 {projects.map((project, i) => (
                     <Project
@@ -127,22 +97,15 @@ export default function Work() {
                 ))}
             </div>
 
-            {/* ── Hover modal ──
-           THIS is what was missing — the divs the refs point to.
-      ── */}
             <div ref={modalContainerRef} className={styles.modalContainer}>
                 <div ref={modalSliderRef} className={styles.modalSlider}>
                     {projects.map((project, i) => (
-                        <div
-                            key={i}
-                            className={styles.modal}
-                            style={{ backgroundColor: project.color }}
-                        >
+                        <div key={i} className={styles.modal} style={{ backgroundColor: project.color }}>
                             <Image
-                                src={`/images/${project.src}`}
+                                src={`/images/products/${project.src}`}
                                 alt={project.title}
-                                width={260}
-                                height={200}
+                                width={380}
+                                height={320}
                                 style={{ objectFit: "cover", width: "100%", height: "100%" }}
                             />
                         </div>
@@ -150,13 +113,8 @@ export default function Work() {
                 </div>
             </div>
 
-            {/* ── Custom cursor ── */}
             <div ref={cursorRef} className={styles.cursor} />
-
-            {/* ── Cursor label ── */}
-            <div ref={cursorLabelRef} className={styles.cursorLabel}>
-                View
-            </div>
+            <div ref={cursorLabelRef} className={styles.cursorLabel}>View</div>
         </main>
     );
 }
