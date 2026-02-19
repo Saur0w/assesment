@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+.section {
+  background: #fafbfd;
+  padding: 7rem 8%;
+  font-family: "Roboto", sans-serif;
+
+  @media (max-width: 768px) {
+    padding: 5rem 6%;
+  }
+}
+
+// ── Header ──────────────────────────────────────────────────────────────────
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 1.5rem;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: #111;
+
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
+  }
+}
+
+// ── List ─────────────────────────────────────────────────────────────────────
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 48px 1fr 1fr;
+  align-items: start;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid #e8e8e8;
+  transition: background 0.2s ease;
+
+  &:hover {
+    .title { color: #000; }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 36px 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1.5rem 0;
+  }
+}
+
+.num {
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #bbb;
+  padding-top: 0.25rem;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #222;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
+}
+
+.desc {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: #888;
+  line-height: 1.65;
+  max-width: 360px;
+
+  @media (max-width: 768px) {
+    grid-column: 2;
+    max-width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    grid-column: 1;
+  }
+}

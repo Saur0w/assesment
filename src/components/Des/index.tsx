@@ -7,13 +7,16 @@ export default function Des() {
     return (
         <section className={styles.des}>
             <div className={styles.head}>
-                <h1>Innovating Your <br />Digital Future</h1>
+                <h1>Your Ultimate<br />Tech Destination.</h1>
             </div>
             <div className={styles.text}>
                 <Text>
                     <p>
-                        Usha InfoTech is a forward-thinking IT solutions provider dedicated to empowering businesses through cutting-edge technology.<br />
-                        We specialize in custom software development, cloud integration, and digital transformation strategies tailored to meet the <br />unique needs of our clients.<br />
+                        Usha Infotech is Mumbai&#39;s go-to store for premium technology.
+                        From high-performance gaming laptops and custom-built PCs to
+                        4K monitors and professional CCTV systems — we carry it all,
+                        genuine and warranty-backed.
+                        Walk in, get expert advice, walk out with exactly what you need.
                     </p>
                 </Text>
             </div>

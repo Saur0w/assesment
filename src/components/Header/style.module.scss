@@ -29,12 +29,9 @@
       margin: 0;
       padding: 0;
 
-      // Tablet
       @media (max-width: 768px) {
         gap: 2.5rem;
       }
-
-      // Mobile
       @media (max-width: 480px) {
         gap: 1.75rem;
       }
